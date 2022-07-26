@@ -14,7 +14,7 @@ import threading
 root = tkinter.Tk()
 root.geometry("500x500")
 
-TRAINING_EPOCHS = 100000 # Change this to adjust the neural network training loops
+TRAINING_EPOCHS = 1_000_000 # Change this to adjust the neural network training loops
 
 def sigmoid(x, deriv=False): # Sigmoid Function
     if deriv:
@@ -46,7 +46,7 @@ def train_thread_func():
         l1_delta = l1_error * sigmoid(l1, True)
 
         syn0 += np.dot(l0.T, l1_delta)
-        if i % 1000 == 0:
+        if i % 10000 == 0:
             val += 1
             progress["value"] = val
             pleasewaitlabel.config(text = "Please wait... " + str(val) + "%")
@@ -64,8 +64,9 @@ def train_thread_func():
         l1_list[i] = line # Change the line to the modified line
     l1_list = "".join(l1_list)
     l1_list = json.loads(l1_list) # Change the string to a list
+    print(l1_list)
     for i, num in enumerate(l1_list):
-        if num[0] >= 0.9:
+        if num[0] >= 0.99:
             num = 1 # Round the number to 1 if the network predicts the number is close to 1
         else:
             num = 0 # Round the number to 0 if the network predicts the number is close to 0
