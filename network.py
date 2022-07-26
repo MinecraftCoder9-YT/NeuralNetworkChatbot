@@ -1,3 +1,9 @@
+"""
+NeuralNetworkChatbot.
+This makes a chatbot using NumPy.
+
+"""
+
 import tkinter
 from tkinter.ttk import Label, Progressbar
 import numpy as np
